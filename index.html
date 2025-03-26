@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Взлом кодового замка</title>
+    <style>
+        body {
+            background: #111;
+            color: #0f0;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            padding: 50px;
+        }
+        .lock-container {
+            border: 2px solid #0f0;
+            display: inline-block;
+            padding: 20px;
+            box-shadow: 0 0 10px #0f0;
+            background: #222;
+        }
+        .display {
+            font-size: 2em;
+            margin-bottom: 10px;
+            background: #000;
+            padding: 10px;
+            border: 2px solid #0f0;
+            display: inline-block;
+            width: 100px;
+        }
+        .buttons button {
+            font-size: 1.5em;
+            margin: 5px;
+            padding: 10px;
+            background: #333;
+            color: #0f0;
+            border: 1px solid #0f0;
+            cursor: pointer;
+        }
+        .buttons button:hover {
+            background: #444;
+        }
+    </style>
+</head>
+<body>
+    <h1>Взлом кодового замка</h1>
+    <div class="lock-container">
+        <div class="display" id="display">0000</div>
+        <div class="buttons">
+            <button onclick="enterDigit(1)">1</button>
+            <button onclick="enterDigit(2)">2</button>
+            <button onclick="enterDigit(3)">3</button><br>
+            <button onclick="enterDigit(4)">4</button>
+            <button onclick="enterDigit(5)">5</button>
+            <button onclick="enterDigit(6)">6</button><br>
+            <button onclick="enterDigit(7)">7</button>
+            <button onclick="enterDigit(8)">8</button>
+            <button onclick="enterDigit(9)">9</button><br>
+            <button onclick="clearCode()">Стереть</button>
+            <button onclick="enterDigit(0)">0</button>
+            <button onclick="checkCode()">Ввод</button>
+        </div>
+    </div>
+    <p id="message"></p>
+    
+    <script>
+        let code = "9941"; // Загаданный код
+        let inputCode = "";
+        
+        function enterDigit(digit) {
+            if (inputCode.length < 4) {
+                inputCode += digit;
+                document.getElementById("display").innerText = inputCode.padStart(4, '0');
+            }
+        }
+        
+        function clearCode() {
+            inputCode = "";
+            document.getElementById("display").innerText = "0000";
+        }
+        
+        function checkCode() {
+            if (inputCode === code) {
+                document.getElementById("message").innerText = "Замок открыт!";
+                document.getElementById("message").style.color = "lime";
+            } else {
+                document.getElementById("message").innerText = "Ошибка! Попробуйте снова.";
+                document.getElementById("message").style.color = "red";
+                clearCode();
+            }
+        }
+    </script>
+</body>
+</html>
